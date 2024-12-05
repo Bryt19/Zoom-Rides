@@ -1,0 +1,9 @@
+  =>  Template Name    : Zoom Rides - Car Rental Website 
+
+  =>  Template Link    : https://htmlcodex.com/car-rent-website-template
+
+  =>  Template License : https://htmlcodex.com/license (or read the LICENSE.txt file)
+
+  =>  Template Author  : Bryt19
+
+  =>  Author Website   : https://htmlcodex.com
