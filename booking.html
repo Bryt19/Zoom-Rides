@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Page</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url('./img/car 3.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+        }
+
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.7); 
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center; /* Center the content vertically */
+            align-items: center;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            margin-top: 135px; /* Adds space between the navbar and the container */
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        select, input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+
+        select:focus, input[type="text"]:focus, input[type="date"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .go-home-btn, .view-booking-btn {
+            width: 48%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .go-home-btn {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .go-home-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+
+        .view-booking-btn {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .view-booking-btn:hover {
+            background-color: #5a6268;
+            transform: translateY(-3px);
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .valid {
+            color: green;
+            font-size: 1.2rem;
+        }
+
+        .message {
+            color: red;
+        }
+
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        /* Footer styling */
+        .footer {
+            width: 100%;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer p {
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h1>Welcome to Zoom Rides Car Rental</h1>
+    </div> 
+
+    <!-- Main Content Area -->
+    <div class="content-wrapper">
+        <div class="container">
+            <h2>Book Your Ride.</h2>
+            <form id="bookingForm" onsubmit="return handleBooking(event)">
+                <!-- Car Name Input -->
+                <label for="carName">Car Name</label>
+                <select id="carName" name="carName" required>
+                    <option selected>Select Your Car type</option>
+                    <option value="BMW M4 Competition">BMW M4 Competition</option>
+                    <option value="Mercedes Benz AMG One">Mercedes Benz AMG One</option>
+                    <option value="Ferrari 488 Pista">Ferrari 488 Pista</option>
+                    <option value="Toyota Supra">Toyota Supra</option>
+                    <option value="Tesla Model 3">Tesla Model 3</option>
+                    <option value="Nissan GTR 35">Nissan GTR 35</option>
+                    <option value="Pagani Zonda">Pagani Zonda</option>
+                    <option value="Koenigsegg Jesko">Koenigsegg Jesko</option>
+                    <option value="Lamborghini Sesto Elemento">Lamborghini Sesto Elemento</option>
+                    <option value="McLaren 720s">McLaren 720s</option>
+                </select>
+
+                <!-- Pick Up Location Input -->
+                <label for="pickupLocation">Pick-up Location</label>
+                <input type="text" id="pickupLocation" name="pickupLocation" placeholder="Enter pick-up location" required>
+
+                <!-- Drop Off Location Input -->
+                <label for="dropoffLocation">Drop-off Location</label>
+                <input type="text" id="dropoffLocation" name="dropoffLocation" placeholder="Enter drop-off location" required>
+
+                <!-- Pick Up Date Input -->
+                <label for="pickupDate">Pick-up Date</label>
+                <input type="date" id="pickupDate" name="pickupDate" required>
+
+                <!-- Drop Off Date Input -->
+                <label for="dropoffDate">Drop-off Date</label>
+                <input type="date" id="dropoffDate" name="dropoffDate" required>
+
+                <!-- Submit Button -->
+                <input type="submit" value="Confirm Booking">
+                <div id="message" class="message"></div>
+
+                <!-- Button container for side by side buttons -->
+                <div class="button-container">
+                    <!-- Go to Homepage Button -->
+                    <button type="button" class="go-home-btn" style="display:none;" onclick="window.location.href='homepage.html';">Back to Homepage</button>
+
+                    <!-- View Booking Button -->
+                    <button type="button" class="view-booking-btn" style="display:none;" onclick="window.location.href='confirmation.html';">View Booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Handle the booking form
+        function handleBooking(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the values from the form
+            const carName = document.getElementById('carName').value.trim();
+            const pickupLocation = document.getElementById('pickupLocation').value.trim();
+            const dropoffLocation = document.getElementById('dropoffLocation').value.trim();
+            const pickupDate = document.getElementById('pickupDate').value;
+            const dropoffDate = document.getElementById('dropoffDate').value;
+            const messageDiv = document.getElementById('message');
+            const goHomeButton = document.querySelector('.go-home-btn');
+            const viewBookingButton = document.querySelector('.view-booking-btn');
+            const confirmButton = document.querySelector('input[type="submit"]');
+
+            // Clear previous validation message
+            messageDiv.textContent = "";
+
+            // Validate if all fields are filled
+            if (!carName || !pickupLocation || !dropoffLocation || !pickupDate || !dropoffDate) {
+                messageDiv.textContent = "Please fill out all required fields.";
+                messageDiv.className = "message";
+                return;
+            }
+
+            // Check if pick-up date is before drop-off date
+            if (new Date(pickupDate) > new Date(dropoffDate)) {
+                messageDiv.textContent = "Pick-up date cannot be after drop-off date.";
+                messageDiv.className = "message";
+                return;
+            }
+
+            // Store the booking details in localStorage
+            localStorage.setItem('carName', carName);
+            localStorage.setItem('pickupLocation', pickupLocation);
+            localStorage.setItem('dropoffLocation', dropoffLocation);
+            localStorage.setItem('pickupDate', pickupDate);
+            localStorage.setItem('dropoffDate', dropoffDate);
+
+            // Display a success message
+            messageDiv.textContent = `Booking confirmed! ${carName} from ${pickupLocation} to ${dropoffLocation}.`;
+            messageDiv.className = "valid"; // Success message
+
+            // Hide the "Confirm Booking" button and show the "Back to Homepage" and "View Booking" buttons
+            confirmButton.style.display = "none";
+            goHomeButton.style.display = "block";
+            viewBookingButton.style.display = "block";
+        }
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2025 Zoom Rides Car Rental. All rights reserved.</p>
+    </div>
+
+</body>
+</html>

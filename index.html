@@ -1,1270 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('./img/car\ W.jpg'); /* Add your background image path here */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            flex-direction: column;
+        }
 
-    <head>
-        <meta charset="utf-8">
-        <title>Zoom Rides - Car Rent Website</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Car rental" name="keywords">
-        <meta content="Home" name="description">
+        .navbar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            width: 100%;
+        }
 
-        <!-- Google Web Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+        .navbar h1 {
+            font-size: 2rem;
+            color: #fff;
+            text-transform: uppercase;
+        }
 
-        <!-- Icon Font Stylesheet -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+            padding: 40px;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px); /* Optional, adds blur effect on the background */
+            margin-top: 80px; /* Added space from the navbar */
+            margin-bottom: 20px; /* Added space between form and footer */
+        }
 
-        <!-- Libraries Stylesheet -->
-        <link href="lib/animate/animate.min.css" rel="stylesheet">
-        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
 
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
 
-        <!-- Customized Bootstrap Stylesheet -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #fff;
+            color: #333;
+        }
 
-        <!-- Template Stylesheet -->
-        <link href="css/style.css" rel="stylesheet">
-    </head>
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
 
-    <body>
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
 
-        <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
+        .message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .valid {
+            color: green;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .sign-in-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .sign-in-link a {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .sign-in-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+                max-width: 90%;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>Welcome to Zoom Rides Car Rental</h1>
+    </div>
+
+<div class="container">
+    <h2>Login to Your Account</h2>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+        <input type="submit" value="Login">
+        <div id="validationMessage" class="message"></div>
+
+        <div class="sign-in-link">
+            <p>Don't have an account? <a href="registration.html">Sign Up</a></p>
         </div>
-        <!-- Spinner End -->
+    </form>
+</div>
 
-        <!-- Topbar Start -->
-        <div class="container-fluid topbar bg-secondary d-none d-xl-block w-100">
-            <div class="container">
-                <div class="row gx-0 align-items-center" style="height: 45px;">
-                    <div class="col-lg-6 text-center text-lg-start mb-lg-0">
-                        <div class="d-flex flex-wrap">
-                            <a href="https://shorturl.at/kldqd" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Find A Location</a>
-                            <a href="tel:+233 591781440" class="text-muted me-4"><i class="fas fa-phone-alt text-primary me-2"></i>+233 591 781440</a>
-                            <a href="mailto:ac.bryt19@gmail.com" class="text-muted me-0"><i class="fas fa-envelope text-primary me-2"></i>ac.bryt19@gmail.com</a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 text-center text-lg-end">
-                        <div class="d-flex align-items-center justify-content-end">
-                            <a href="tel:+233 591781440" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-telegram"></i></a>
-                            <a href="https://x.com/airxqhobarbryt" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-twitter"></i></a>
-                            <a href="https://www.instagram.com/jiggy_soul/" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-instagram"></i></a>
-                            <a href="www.linkedin.com/in/bright-akoto19" class="btn btn-light btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Topbar End -->
+<footer>
+    <p>&copy; 2025 Zoom Rides. All rights reserved.</p>
+</footer>
 
-        <!-- Navbar & Hero Start -->
-        <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
-            <div class="container">
-                <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
-                        <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Zoom Rides</h1>
-                        <!-- <img src="" alt="Logo"> -->
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars"></span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto py-0">
-                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Service</a>
-                            <a href="blog.html" class="nav-item nav-link">Blog</a>
-                            
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0">
-                                    <a href="feature.html" class="dropdown-item">Our Features</a>
-                                    <a href="cars.html" class="dropdown-item">Our Cars</a>
-                                    <a href="team.html" class="dropdown-item">Our Team</a>
-                                    <a href="testimonial.html" class="dropdown-item">Reviews</a>
-                                </div>
-                            </div>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <a href="index.html" class="btn btn-primary rounded-pill py-2 px-4">Get Started</a>
-                    </div>
-                </nav>
-            </div>
-        </div>
-        <!-- Navbar & Hero End -->
+<script>
+    // Handle the login form
+    function handleLogin(event) {
+        event.preventDefault(); // Prevent form submission
 
-        <!-- Carousel Start -->
-        <div class="header-carousel">
-            <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                <ol class="carousel-indicators">
-                    <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
-                    <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
-                </ol>
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item active">
-                        <img src="./img/home.jpg" class="img-fluid w-100" alt="First slide"/>
-                        <div class="carousel-caption">
-                            <div class="container py-4">
-                                <div class="row g-5">
-                                    <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
-                                        <div class="bg-secondary rounded p-5">
-                                            <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
-                                            <form>
-                                                <div class="row g-3">
-                                                    <div class="col-12">
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Your Car type</option>
-                                                            <option value="1">BMW M4 Competition</option>
-                                                            <option value="2">Mercedes Benz AMG One</option>
-                                                            <option value="3">Toyota Supra</option>
-                                                            <option value="4">Nissan GTR 35</option>
-                                                            <option value="5">Koenigsegg Jesko</option>
-                                                            <option value="6">Lamborghini Sesto Elemento</option>
-                                                            <option value="7">McLaren 720s</option>
-                                                        </select>
-                                                    </div>
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const validationMessage = document.getElementById('validationMessage');
 
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-map-marker-alt"></span> <span class="ms-1">Pick Up</span>
-                                                            </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <a href="#" class="text-start text-white d-block mb-2">Need a different drop-off location?</a>
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-map-marker-alt"></span><span class="ms-1">Drop off</span>
-                                                            </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Up</span>
-                                                            </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
-                                                                <option selected>8:00AM</option>
-                                                                <option value="1">9:00AM</option>
-                                                                <option value="2">10:00AM</option>
-                                                                <option value="3">11:00AM</option>
-                                                                <option value="4">12:00AM</option>
-                                                                <option value="5">1:00PM</option>
-                                                                <option value="6">2:00PM</option>
-                                                                <option value="7">3:00PM</option>
-                                                                <option value="8">4:00PM</option>
-                                                                <option value="9">5:00PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-calendar-alt"></span><span class="ms-1">Drop off</span>
-                                                            </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
-                                                                <option selected>8:00AM</option>
-                                                                <option value="1">9:00AM</option>
-                                                                <option value="2">10:00AM</option>
-                                                                <option value="3">11:00AM</option>
-                                                                <option value="4">12:00AM</option>
-                                                                <option value="5">1:00PM</option>
-                                                                <option value="6">2:00PM</option>
-                                                                <option value="7">3:00PM</option>
-                                                                <option value="8">4:00PM</option>
-                                                                <option value="9">5:00PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <button class="btn btn-light w-100 py-2">Book Now</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
-                                        <div class="text-start">
-                                            <h1 class="display-5 text-white">Get 15% off your rental Plan your trip now</h1>
-                                            <p>Treat yourself in Ghana</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./img/buggatti.jpg" class="img-fluid w-100" alt="First slide"/>
-                        <div class="carousel-caption">
-                            <div class="container py-4">
-                                <div class="row g-5">
-                                    <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
-                                        <div class="bg-secondary rounded p-5">
-                                            <h4 class="text-white mb-4">CONTINUE CAR RESERVATION</h4>
-                                            <form>
-                                                <div class="row g-3">
-                                                    <div class="col-12">
-                                                        <select class="form-select" aria-label="Default select example">
-                                                            <option selected>Select Your Car type</option>
-                                                            <option value="1">BMW M4 Competition</option>
-                                                            <option value="2">Mercedes Benz AMG One</option>
-                                                            <option value="3">Toyota Supra</option>
-                                                            <option value="4">Nissan GTR 35</option>
-                                                            <option value="5">Koenigsegg Jesko</option>
-                                                            <option value="6">Lamborghini Sesto Elemento</option>
-                                                            <option value="7">McLaren 720s</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-map-marker-alt"></span><span class="ms-1">Pick Up</span>
-                                                            </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <a href="#" class="text-start text-white d-block mb-2">Need a different drop-off location?</a>
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-map-marker-alt"></span><span class="ms-1">Drop off</span>
-                                                            </div>
-                                                            <input class="form-control" type="text" placeholder="Enter a City or Airport" aria-label="Enter a City or Airport">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-calendar-alt"></span><span class="ms-1">Pick Up</span>
-                                                            </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
-                                                                <option selected>8:00AM</option>
-                                                                <option value="1">9:00AM</option>
-                                                                <option value="2">10:00AM</option>
-                                                                <option value="3">11:00AM</option>
-                                                                <option value="4">12:00AM</option>
-                                                                <option value="5">1:00PM</option>
-                                                                <option value="6">2:00PM</option>
-                                                                <option value="7">3:00PM</option>
-                                                                <option value="8">4:00PM</option>
-                                                                <option value="9">5:00PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-calendar-alt"></span><span class="ms-1">Drop off</span>
-                                                            </div>
-                                                            <input class="form-control" type="date">
-                                                            <select class="form-select ms-3" aria-label="Default select example">
-                                                                <option selected>8:00AM</option>
-                                                                <option value="1">9:00AM</option>
-                                                                <option value="2">10:00AM</option>
-                                                                <option value="3">11:00AM</option>
-                                                                <option value="4">12:00AM</option>
-                                                                <option value="5">1:00PM</option>
-                                                                <option value="6">2:00PM</option>
-                                                                <option value="7">3:00PM</option>
-                                                                <option value="8">4:00PM</option>
-                                                                <option value="9">5:00PM</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <button class="btn btn-light w-100 py-2">Book Now</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
-                                        <div class="text-start">
-                                            <h1 class="display-5 text-white">Get 15% off your rental! Choose Your Model </h1>
-                                            <p>Treat yourself in Ghana</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Carousel End -->
+        // Retrieve the credentials from localStorage
+        const storedUsername = localStorage.getItem('username');
+        const storedPassword = localStorage.getItem('password');
 
-        <!-- Features Start -->
-        <div class="container-fluid feature py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Zoom Rides<span class="text-primary"> Features</span></h1>
-                    <p class="mb-0">Welcome to Zoom Rides, your trusted car rental partner offering unmatched convenience and quality. We’re dedicated to making your travel experience as seamless and comfortable as possible, whether you're commuting around town or embarking on a road trip. Our goal is to provide you with the best vehicles and top-notch service that you deserve.
-                    </p>
-                </div>
-                <div class="row g-4 align-items-center">
-                    <div class="col-xl-4">
-                        <div class="row gy-4 gx-0">
-                            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <span class="fa fa-trophy fa-2x"></span>
-                                    </div>
-                                    <div class="ms-4">
-                                        <h5 class="mb-3">First Class services</h5>
-                                        <p class="mb-0">At Zoom Rides, we prioritize customer satisfaction above all. Our team is committed to delivering exceptional service from the moment you book until you return the car, ensuring you have a smooth and hassle-free rental experience.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="feature-item">
-                                    <div class="feature-icon">
-                                        <span class="fa fa-road fa-2x"></span>
-                                    </div>
-                                    <div class="ms-4">
-                                        <h5 class="mb-3">24/7 road assistance</h5>
-                                        <p class="mb-0">Your safety and peace of mind are our priority. That's why Zoom Rides provides 24/7 road assistance. No matter when or where you need help, we’re just a phone call away to assist you with any roadside emergency.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
-                        <img src="./img/c 300.png" class="img-fluid w-100" style="object-fit: cover;" alt="Img">
-                    </div>
-                    <div class="col-xl-4">
-                        <div class="row gy-4 gx-0">
-                            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="feature-item justify-content-end">
-                                    <div class="text-end me-4">
-                                        <h5 class="mb-3">Quality at Minimum</h5>
-                                        <p class="mb-0">We offer the perfect balance of quality and affordability. Our fleet of well-maintained vehicles is available at competitive rates, ensuring that you get the best value for your money without compromising on quality.</p>
-                                    </div>
-                                    <div class="feature-icon">
-                                        <span class="fa fa-tag fa-2x"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 wow fadeInUp" data-wow-delay="0.3s">
-                                <div class="feature-item justify-content-end">
-                                    <div class="text-end me-4">
-                                        <h5 class="mb-3">Free Pick-Up & Drop-Off</h5>
-                                        <p class="mb-0">We make renting with Zoom Rides even more convenient by offering free pick-up and drop-off services. Whether you’re at home, the airport, or your hotel, we’ll come to you and ensure that your rental experience is hassle-free.</p>
-                                    </div>
-                                    <div class="feature-icon">
-                                        <span class="fa fa-map-pin fa-2x"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Features End -->
+        // Clear previous validation message
+        validationMessage.textContent = "";
 
-        <!-- About Start -->
-        <div class="container-fluid overflow-hidden about py-5">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
-                        <div class="about-item">
-                            <div class="pb-5">
-                                <h1 class="display-5 text-capitalize">Zoom Rides <span class="text-primary">About</span></h1>
-                                <p class="mb-0">At Zoom Rides, we’re more than just a car rental service—we’re your trusted partner in travel. Our mission is to provide a seamless, reliable, and enjoyable experience for our customers, ensuring they have access to high-quality vehicles and exceptional service whenever they need it. Whether you're commuting through the city or embarking on an adventure, Zoom Rides makes your journey effortless and enjoyable.
-                                </p>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="about-item-inner border p-4">
-                                        <div class="about-icon mb-4">
-                                            <img src="img/about-icon-1.png" class="img-fluid w-50 h-50" alt="Icon">
-                                        </div>
-                                        <h5 class="mb-3">Our Vision</h5>
-                                        <p class="mb-0">Our vision is to be the go-to car rental company, known for putting customers first and making travel simple. We want to offer an experience that’s convenient, reliable, and always a little more enjoyable.</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="about-item-inner border p-4">
-                                        <div class="about-icon mb-4">
-                                            <img src="img/about-icon-2.png" class="img-fluid h-50 w-50" alt="Icon">
-                                        </div>
-                                        <h5 class="mb-3">Our Mision</h5>
-                                        <p class="mb-0">Our mission is simple: to provide affordable, reliable, and easy car rentals that make your journeys stress-free. We’re here to offer top-notch customer service and well-maintained vehicles, so you can drive with confidence.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-item my-4">At Zoom Rides, we focus on making your experience as smooth and enjoyable as possible. From easy booking to friendly customer service, we’re here to ensure you have everything you need for a stress-free journey. Whether it’s a quick trip around town or a longer adventure, we provide reliable cars and support every step of the way. Your satisfaction is our priority, and we aim to make every ride a great one.
-                            </p>
-                            <div class="row g-4">
-                                <div class="col-lg-6">
-                                    <div class="text-center rounded bg-secondary p-4">
-                                        <h1 class="display-6 text-white">13</h1>
-                                        <h5 class="text-light mb-0">Years Of Experience</h5>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="rounded">
-                                        <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Consistently providing reliable and well-maintained vehicles.</p>
-                                        <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Building strong customer relationships through excellent service.</p>
-                                        <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Ensuring quick and hassle-free bookings for every customer.</p>
-                                        <p class="mb-0"><i class="fa fa-check-circle text-primary me-1"></i> Offering 24/7 support, always available for assistance when needed.</p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5 d-flex align-items-center">
-                                    <a href="about.html" class="btn btn-primary rounded py-3 px-5">More About Us</a>
-                                </div>
-                                <div class="col-lg-7">
-                                    <div class="d-flex align-items-center">
-                                        <img src="img/attachment-img.jpg" class="img-fluid rounded-circle border border-4 border-secondary" style="width: 100px; height: 100px;" alt="Image">
-                                        <div class="ms-4">
-                                            <h4>Bright Akoto</h4>
-                                            <p class="mb-0">Zoom Rides Founder</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
-                        <div class="about-img">
-                            <div class="img-1">
-                                <img src="img/about-img.jpg" class="img-fluid rounded h-100 w-100" alt="">
-                            </div>
-                            <div class="img-2">
-                                <img src="./img/vin 1.png" class="img-fluid rounded w-100" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
+        // Check if entered credentials match the stored ones
+        if (username === storedUsername && password === storedPassword) {
+            validationMessage.textContent = "Login successful! Redirecting to homepage...";
+            validationMessage.className = "valid"; // Success message
 
-        <!-- Fact Counter -->
-        <div class="container-fluid counter bg-secondary py-5">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="counter-item text-center">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-thumbs-up fa-2x"></i>
-                            </div>
-                            <div class="counter-counting my-3">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">874</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                            <h4 class="text-white mb-0">Happy Clients</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="counter-item text-center">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-car-alt fa-2x"></i>
-                            </div>
-                            <div class="counter-counting my-3">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">133</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                            <h4 class="text-white mb-0">Number of Cars</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="counter-item text-center">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-building fa-2x"></i>
-                            </div>
-                            <div class="counter-counting my-3">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">127</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                            <h4 class="text-white mb-0">Car Center</h4>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="counter-item text-center">
-                            <div class="counter-item-icon mx-auto">
-                                <i class="fas fa-clock fa-2x"></i>
-                            </div>
-                            <div class="counter-counting my-3">
-                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">956</span>
-                                <span class="h1 fw-bold text-white">+</span>
-                            </div>
-                            <h4 class="text-white mb-0">Total kilometers</h4>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Fact Counter -->
+            // Redirect to the homepage after a short delay
+            setTimeout(() => {
+                window.location.href = "homepage.html"; // Change to your homepage URL
+            }, 2000); // Redirect after 1.5 seconds
+        } else {
+            // Show error message if credentials don't match
+            validationMessage.textContent = "Invalid username or password.";
+            validationMessage.className = "message"; // Error message
+        }
 
-        <!-- Services Start -->
-        <div class="container-fluid service py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Zoom Rides <span class="text-primary">Services</span></h1>
-                    <p class="mb-0">At Zoom Rides, we offer a wide range of services to make your travel experience easy and enjoyable. Whether you need a car for a short trip or a longer journey, we’ve got you covered with flexible options and great customer service.
-                    </p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-phone-alt fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Phone Reservation</h5>
-                            <p class="mb-0">Book your car rental easily with our simple phone reservation service. Just give us a call, and we’ll handle the rest, ensuring a smooth experience from start to finish.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-money-bill-alt fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Special Rates</h5>
-                            <p class="mb-0">We offer competitive rates and special deals to give you the best value for your money, without compromising on quality.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-road fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">One Way Rental</h5>
-                            <p class="mb-0">Need a car for a one-way trip? Zoom Rides offers one-way rentals, so you can pick up your car at one location and drop it off at another with no hassle.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-umbrella fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Life Insurance</h5>
-                            <p class="mb-0"> Drive with peace of mind knowing that we include life insurance with all our rentals, ensuring you’re covered during your journey.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-building fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">City to City</h5>
-                            <p class="mb-0"> Traveling between cities? Zoom Rides makes it easy with our city-to-city rental services, offering you the flexibility to travel long distances with comfort and ease.</p>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="service-item p-4">
-                            <div class="service-icon mb-4">
-                                <i class="fa fa-car-alt fa-2x"></i>
-                            </div>
-                            <h5 class="mb-3">Free Rides</h5>
-                            <p class="mb-0">Enjoy the added benefit of free rides for pick-up and drop-off, making your rental experience even more convenient and stress-free.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Services End -->
+        // This should be done when the user logs in successfully
+localStorage.setItem("userLoggedIn", true);  // Mark the user as logged in
+localStorage.setItem("avatar", "path-to-avatar.jpg");  // Store their avatar image path (or use a default avatar)
 
-        <!-- Car categories Start -->
-        <div class="container-fluid categories pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Vehicle <span class="text-primary">Categories</span></h1>
-                    <p class="mb-0">At Zoom Rides, we offer a variety of vehicle categories to suit your travel needs, whether you're looking for comfort, style, or practicality. Our fleet is well-maintained and regularly serviced to ensure a smooth, reliable driving experience.
-                    </p>
-                </div>
-                <div class="categories-carousel owl-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/bmw 4.jpg" class="img-fluid w-100 rounded-top" alt="M4">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>BMW M4</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">4.8 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star text-body"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">230:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT/MT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2023</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">7K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/amg.jpg" class="img-fluid w-100 rounded-top" alt="benz">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>Mercedes Benz AMG One</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">4.5 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star text-body"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$700:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2024</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">3K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
+    }
+</script>
 
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/stutu.jpg" class="img-fluid w-100 rounded-top" alt="benz">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>Toyota Supra</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">4.3 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star text-body"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$250:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2024</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">9K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/r 35.jpg" class="img-fluid w-100 rounded-top" alt="r 35">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>Nissan GTR 35</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">5.0 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$450:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2021</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">27K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/jesko.jpg" class="img-fluid w-100 rounded-top" alt="Jesko">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>Koenigsegg Jesko</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">5.0 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$1000:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2023</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">2K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/sesto.jpg" class="img-fluid w-100 rounded-top" alt="Jesko">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>Lamborghini Sesto</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">5.0 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$400:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2023</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">2K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="categories-item p-4">
-                        <div class="categories-item-inner">
-                            <div class="categories-img rounded-top">
-                                <img src="./img/laren.jpg" class="img-fluid w-100 rounded-top" alt="">
-                            </div>
-                            <div class="categories-content rounded-bottom p-4">
-                                <h4>McLaren 720s</h4>
-                                <div class="categories-review mb-4">
-                                    <div class="me-3">4.8 Review</div>
-                                    <div class="d-flex justify-content-center text-secondary">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <h4 class="bg-white text-primary rounded-pill py-2 px-4 mb-0">$570:00/Day</h4>
-                                </div>
-                                <div class="row gy-2 gx-0 text-center mb-4">
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-users text-dark"></i> <span class="text-body ms-1">2 Seat</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">AT</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-gas-pump text-dark"></i> <span class="text-body ms-1">Petrol</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-car text-dark"></i> <span class="text-body ms-1">2024</span>
-                                    </div>
-                                    <div class="col-4 border-end border-white">
-                                        <i class="fa fa-cogs text-dark"></i> <span class="text-body ms-1">AUTO</span>
-                                    </div>
-                                    <div class="col-4">
-                                        <i class="fa fa-road text-dark"></i> <span class="text-body ms-1">14K</span>
-                                    </div>
-                                </div>
-                                <a href="#" class="btn btn-primary rounded-pill d-flex justify-content-center py-3">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Car categories End -->
-
-        <!-- Car Steps Start -->
-        <div class="container-fluid steps py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize text-white mb-3">Zoom rides<span class="text-primary"> Process</span></h1>
-                    <p class="mb-0 text-white">At Zoom Rides, we’ve simplified the car rental process to make your experience as easy and convenient as possible. From booking to driving, we’ve got you covered every step of the way.
-                    </p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="steps-item p-4 mb-4">
-                            <h4>Come In Contact</h4>
-                            <p class="mb-0">Start by reaching out to us. You can either call us or visit our website to explore our car rental options. Our friendly team is always available to assist you with any questions or booking requests.</p>
-                            <div class="setps-number">01.</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="steps-item p-4 mb-4">
-                            <h4>Choose A Car</h4>
-                            <p class="mb-0">Browse through our wide range of vehicles and pick the one that best suits your needs. Whether it’s a compact car for a quick city trip or a spacious SUV for a road trip, we have something for every occasion.</p>
-                            <div class="setps-number">02.</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="steps-item p-4 mb-4">
-                            <h4>Enjoy Driving</h4>
-                            <p class="mb-0">Once you’ve selected your vehicle, all that’s left to do is hit the road! With your car ready to go, enjoy a smooth and stress-free driving experience with the flexibility and comfort that Zoom Rides offers.</p>
-                            <div class="setps-number">03.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Car Steps End -->
-
-        <!-- Blog Start -->
-        <div class="container-fluid blog py-5">
-            <div class="container py-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Zoom rides<span class="text-primary"> Blog & News</span></h1>
-                    <p class="mb-0">On a Zoom Rides, blogs offer helpful tips and personal stories, while news keeps you updated on important changes and updates. Together, they help you make informed decisions and enhance your rental experience.
-                    </p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="./img/ferrari.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="blog-content rounded-bottom p-4">
-                                <div class="blog-date">30 Apr 2024</div>
-                                <div class="blog-comment my-3">
-                                    <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Malcolm.J</span></div>
-                                    <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">9 Comments</span></div>
-                                </div>
-                                <a href="https://rbps-car.com/rental-cars-how-to-check-driving-fines/" class="h4 d-block mb-3">Rental Cars how to check driving fines?</a>
-                                <p class="mb-3">To check for driving fines on a rental car, you can ask the rental company when returning the car, review your rental agreement for fine details, use the company’s online portal if available, contact local authorities for fines issued during your rental, or monitor your credit card for any related charges. This helps you stay informed and avoid surprise fees.</p>
-                                <a href="https://rbps-car.com/rental-cars-how-to-check-driving-fines/" class="">Read More  <i class="fa fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="./img/skyline.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="blog-content rounded-bottom p-4">
-                                <div class="blog-date">13 Aug 2024</div>
-                                <div class="blog-comment my-3">
-                                    <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Caan.T</span></div>
-                                    <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">7 Comments</span></div>
-                                </div>
-                                <a href="https://sapphireexecutivetravel.com/how-much-it-cost-to-rent-a-sports-car/" class="h4 d-block mb-3">Rental cost of sport and other cars</a>
-                                <p class="mb-3">Renting a sports car usually costs between $100 and $500 per day due to its luxury and performance. Regular cars are more affordable, typically ranging from $30 to $100 per day. Prices vary based on car type, location, and rental duration. Sports cars offer more excitement, while regular cars are budget-friendly.</p>
-                                <a href="https://sapphireexecutivetravel.com/how-much-it-cost-to-rent-a-sports-car/" class="">Read More  <i class="fa fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img src="./img/brabus.jpg" class="img-fluid rounded-top w-100" alt="Image">
-                            </div>
-                            <div class="blog-content rounded-bottom p-4">
-                                <div class="blog-date">27 Nov 2024</div>
-                                <div class="blog-comment my-3">
-                                    <div class="small"><span class="fa fa-user text-primary"></span><span class="ms-2">Jiggy.S</span></div>
-                                    <div class="small"><span class="fa fa-comment-alt text-primary"></span><span class="ms-2">5 Comments</span></div>
-                                </div>
-                                <a href="https://www.enterprise.com/en/help/faqs/car-rental-requirements.html" class="h4 d-block mb-3">Document required for car rental</a>
-                                <p class="mb-3">To rent a car, you'll need a valid driver's license, a credit card in your name, and a passport if you're renting abroad. Some companies may also require proof of insurance, or you can purchase it through them. These documents are necessary for completing the rental process. Make sure to have everything ready before you pick up the car.</p>
-                                <a href="https://www.enterprise.com/en/help/faqs/car-rental-requirements.html" class="">Read More  <i class="fa fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Blog End -->
-
-        <!-- Banner Start -->
-        <div class="container-fluid banner pb-5 wow zoomInDown" data-wow-delay="0.1s">
-            <div class="container pb-5">
-                <div class="banner-item rounded">
-                    <img src="img/banner-1.jpg" class="img-fluid rounded w-100" alt="">
-                    <div class="banner-content">
-                        <h2 class="text-primary">Rent Your Car</h2>
-                        <h1 class="text-white">Interested in Renting?</h1>
-                        <p class="text-white">Don't hesitate and send us a message.</p>
-                        <div class="banner-btn">
-                            <a href="tel:+233 591781440" class="btn btn-secondary rounded-pill py-3 px-4 px-md-5 me-2">WhatsApp</a>
-                            <a href="tel:=233 208564934" class="btn btn-primary rounded-pill py-3 px-4 px-md-5 ms-2">Contact Us</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Banner End -->
-
-        <!-- Team Start -->
-        <div class="container-fluid team pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Customer<span class="text-primary"> Suport</span> Center</h1>
-                    <p class="mb-0">Customer support service is there to help you with any questions or issues you might have before, during, or after using a service. It can assist with booking problems, vehicle issues, or clarifications on policies. Support is typically available through phone, email, or live chat. A good customer support team ensures you're satisfied and helps resolve problems quickly and efficiently.
-                    </p>
-                </div>
-                <div class="row g-4">
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item p-4 pt-0">
-                            <div class="team-img">
-                                <img src="./img/casey.jpg" class="img-fluid rounded w-100" alt="Image">
-                            </div>
-                            <div class="team-content pt-4">
-                                <h4>CAMERON CASEY</h4>
-                                <p>Customer Service Attendant</p>
-                                <div class="team-icon d-flex justify-content-center">
-                                    <a class="btn btn-square btn-light rounded-circle mx-1" href="https://www.instagram.com/camcasey/"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item p-4 pt-0">
-                            <div class="team-img">
-                                <img src="./img/lewis.jpg" class="img-fluid rounded w-100" alt="Image">
-                            </div>
-                            <div class="team-content pt-4">
-                                <h4>LEWIS HAMILTON</h4>
-                                <p>Client Management Head</p>
-                                <div class="team-icon d-flex justify-content-center">
-                                    <a class="btn btn-square btn-light rounded-circle mx-1" href="https://www.instagram.com/lewishamilton/"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item p-4 pt-0">
-                            <div class="team-img">
-                                <img src="./img/horic.jpg" class="img-fluid rounded w-100" alt="Image">
-                            </div>
-                            <div class="team-content pt-4">
-                                <h4>HORIC AMPOFO</h4>
-                                <p> Groomer/Delivery Person</p>
-                                <div class="team-icon d-flex justify-content-center">
-                                    <a class="btn btn-square btn-light rounded-circle mx-1" href="https://www.instagram.com/horic63s/"><i class="fab fa-instagram"></i></a>  
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item p-4 pt-0">
-                            <div class="team-img">
-                                <img src="./img/teu.jpg" class="img-fluid rounded w-100" alt="Image">
-                            </div>
-                            <div class="team-content pt-4">
-                                <h4>LOUISA TEU</h4>
-                                <p>Driver</p>
-                                <div class="team-icon d-flex justify-content-center">
-                                    <a class="btn btn-square btn-light rounded-circle mx-1" href="https://www.instagram.com/loulu_teu/"><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team End -->
-
-        <!-- Testimonial Start -->
-        <div class="container-fluid testimonial pb-5">
-            <div class="container pb-5">
-                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
-                    <h1 class="display-5 text-capitalize mb-3">Our Clients<span class="text-primary"> Reviews</span></h1>
-                    <p class="mb-0">Client reviews are feedback from customers that help others understand the quality of a service or product. They highlight positive experiences and areas for improvement, guiding potential customers in making informed decisions.
-                    </p>
-                </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="./img/emelia.jpg" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Emelia Hartford</h4>
-                                <p>Car builder & Driver</p>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">"I had an amazing experience renting a car from this company. The booking process was smooth, the car was clean and well-maintained, and the customer service was friendly and helpful. Highly recommend!"</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="./img/micheal.jpg" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Michael Schumacher</h4>
-                                <p>Formula 1 Racer</p>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">"Fantastic service! The staff was professional and quick to assist with any questions I had. The car I rented was in perfect condition, and I had no issues during my trip. Definitely will use again."</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-quote"><i class="fa fa-quote-right fa-2x"></i>
-                        </div>
-                        <div class="testimonial-inner p-4">
-                            <img src="./img/blondie.jpg" class="img-fluid" alt="">
-                            <div class="ms-4">
-                                <h4>Supercar Blondie</h4>
-                                <p>Car Enthusiast</p>
-                                <div class="d-flex text-primary">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="border-top rounded-bottom p-4">
-                            <p class="mb-0">"This was my first time using a rental service, and I couldn't be happier. The car was exactly what I needed, the price was reasonable, and the staff made the entire process so easy. A great experience overall!"</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Testimonial End -->
-
-        <!-- Footer Start -->
-        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <div class="footer-item">
-                                <h4 class="text-white mb-4">About Us</h4>
-                                <p class="mb-3">Zoom Rides is a reliable car rental company offering a variety of well-maintained vehicles for any occasion. They focus on customer satisfaction with easy booking and friendly service.</p>
-                            </div>
-                            <div class="position-relative">
-                                <input class="form-control rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Enter your email">
-                                <button type="button" class="btn btn-secondary rounded-pill position-absolute top-0 end-0 py-2 mt-2 me-2">Subscribe</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Quick Links</h4>
-                            <a href="about.html"><i class="fas fa-angle-right me-2"></i> About</a>
-                            <a href="cars.html"><i class="fas fa-angle-right me-2"></i> Cars</a>
-                            <a href="team.html"><i class="fas fa-angle-right me-2"></i> Team</a>
-                            <a href="contact.html"><i class="fas fa-angle-right me-2"></i> Contact us</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Business Hours</h4>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Mon - Friday:</h6>
-                                <p class="text-white mb-0">09.00 am to 07.00 pm</p>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Saturday:</h6>
-                                <p class="text-white mb-0">10.00 am to 05.00 pm</p>
-                            </div>
-                            <div class="mb-3">
-                                <h6 class="text-muted mb-0">Vacation:</h6>
-                                <p class="text-white mb-0">All Sunday is our vacation</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-6 col-xl-3">
-                        <div class="footer-item d-flex flex-column">
-                            <h4 class="text-white mb-4">Contact Info</h4>
-                            <a href="https://www.google.com/maps/place/Mataheko+pharmacy/@5.6564082,-0.2223469,12.27z/data=!4m6!3m5!1s0xfdf99da4208a8eb:0x47f0ed7db8f1d659!8m2!3d5.5686247!4d-0.2514157!16s%2Fg%2F11f013mqm3?entry=ttu&g_ep=EgoyMDI0MTIwMS4xIKXMDSoASAFQAw%3D%3D"><i class="fa fa-map-marker-alt me-2"></i>Paul Acquah Street, Accra, Ghana</a>
-                            <a href="mailto:ac.bryt19@gmail.com"><i class="fas fa-envelope me-2"></i> ac.bryt19@gmail.com</a>
-                            <a href="tel:+233 591781440"><i class="fas fa-phone me-2"></i> +233 591781440</a>
-                            <a href="tel:+233 591781449" class="mb-3"><i class="fas fa-print me-2"></i> +233 591781440</a>
-                            <div class="d-flex">
-                                <a href="tel:+233 591781440" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-telegram"></i></a>
-                                <a href="https://x.com/airxqhobarbryt" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-twitter"></i></a>
-                                <a href="https://www.instagram.com/jiggy_soul/" class="btn btn-light btn-sm-square rounded-circle me-3"><i class="fab fa-instagram"></i></a>
-                                <a href="www.linkedin.com/in/bright-akoto19" class="btn btn-light btn-sm-square rounded-circle me-0"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
-        
-        <!-- Copyright Start -->
-        <div class="container-fluid copyright py-4">
-            <div class="container">
-                <div class="row g-4 align-items-center">
-                    <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Zoom Rides</a>, All right reserved.</span>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end text-body">
-                        Designed By <a class="border-bottom text-white" href="www.linkedin.com/in/bright-akoto19">DhollarSign</a> Distributed By <a class="border-bottom text-white" href="https://www.instagram.com/jiggy_soul/">jiggy_soul</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Copyright End -->
-
-
-        <!-- Back to Top -->
-        <a href="index.html" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
-
-        
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-    </body>
-
+</body>
 </html>
