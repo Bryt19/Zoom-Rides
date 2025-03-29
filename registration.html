@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form - Zoom Rides</title>
     <style>
-        
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('./img/car.jpg'); /* Add your image path here */
@@ -16,7 +15,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             color: #fff; /* Text color */
@@ -52,7 +51,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             z-index: 200;
-            margin-top: 150px; /* Space between navbar and container */
+            margin-top: 500px; /* Space between navbar and container */
             margin-bottom: 60px; /* Space between container and footer */
         }
 
@@ -133,6 +132,7 @@
             margin-top: 20px;
             font-size: 1.1rem; /* Increase the size to make it more visible */
         }
+
         .sign-in-link p {
             color: #000;
         }
@@ -166,7 +166,23 @@
             }
 
             h2 {
-                font-size: 20px;
+                font-size: 22px;
+            }
+
+            /* Adjust input padding and font size for better readability on mobile */
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="tel"],
+            input[type="number"],
+            select {
+                padding: 15px;
+                font-size: 1rem;
+            }
+
+            input[type="submit"] {
+                font-size: 1rem;
+                padding: 12px;
             }
         }
     </style>

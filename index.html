@@ -143,10 +143,23 @@
             .container {
                 padding: 20px;
                 max-width: 90%;
+                margin-top: 20px; /* Ensure spacing at the top */
             }
 
             h2 {
                 font-size: 20px;
+            }
+
+            /* Make sure inputs are properly sized on small screens */
+            input[type="text"],
+            input[type="password"],
+            input[type="submit"] {
+                padding: 10px;
+                font-size: 1rem;
+            }
+
+            .navbar h1 {
+                font-size: 1.5rem; /* Adjust navbar heading size on mobile */
             }
         }
     </style>
@@ -203,7 +216,7 @@
             // Redirect to the homepage after a short delay
             setTimeout(() => {
                 window.location.href = "homepage.html"; // Change to your homepage URL
-            }, 2000); // Redirect after 1.5 seconds
+            }, 2000); // Redirect after 2 seconds
         } else {
             // Show error message if credentials don't match
             validationMessage.textContent = "Invalid username or password.";
@@ -211,9 +224,8 @@
         }
 
         // This should be done when the user logs in successfully
-localStorage.setItem("userLoggedIn", true);  // Mark the user as logged in
-localStorage.setItem("avatar", "path-to-avatar.jpg");  // Store their avatar image path (or use a default avatar)
-
+        localStorage.setItem("userLoggedIn", true);  // Mark the user as logged in
+        localStorage.setItem("avatar", "path-to-avatar.jpg");  // Store their avatar image path (or use a default avatar)
     }
 </script>
 
