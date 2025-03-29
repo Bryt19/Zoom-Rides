@@ -27,26 +27,6 @@
             min-height: 100vh; /* Ensures body takes full screen height */
         }
 
-        /* Navbar Styling */
-        .navbar {
-            position: static;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            padding: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000; /* Keeps navbar on top */
-        }
-
-        .navbar h1 {
-            margin: 0;
-        }
-
         /* Container Styling */
         .container {
             background-color: rgba(0, 0, 0, 0.8);
@@ -55,8 +35,8 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             width: 80%;
             max-width: 650px;
-            margin-top: 200px;
-            margin-bottom: 150px;
+            margin-top: 100px;
+            margin-bottom: 70px;
         }
 
         /* Main Heading */
@@ -144,8 +124,8 @@
             .container {
                 padding: 20px;
                 width: 85%;
-                margin-top: 200px; /* Added margin-top */
-                margin-bottom: 150px; /* Added margin-bottom */
+                margin-top: 100px; /* Added margin-top */
+                margin-bottom: 70px; /* Added margin-bottom */
             }
 
             h2 {
@@ -167,34 +147,12 @@
                 flex-direction: column;
             }
         }
-
-        /* Footer Styling */
-        .footer {
-            width: 100%;
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-            position: absolute; /* Fixes the footer at the bottom */
-            bottom: 0;
-        }
-
-        .footer p {
-            font-size: 1rem;
-        }
-
     </style>
 
     <!-- Include jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <h1>Welcome to Zoom Rides Car Rental</h1>
-    </div>
 
     <div class="container">
         <h2>Booking Confirmation</h2>
@@ -219,11 +177,6 @@
             <a href="homepage.html" class="go-home-btn">Go to Homepage</a>
             <button class="download-btn" onclick="downloadReceipt()">Download Receipt</button>
         </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2025 Zoom Rides Car Rental. All rights reserved.</p>
     </div>
 
     <script>
