@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <style>
-        body {
+           body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -50,6 +50,7 @@
             backdrop-filter: blur(10px); /* Optional, adds blur effect on the background */
             margin-top: 80px; /* Added space from the navbar */
             margin-bottom: 20px; /* Added space between form and footer */
+            box-sizing: border-box; /* Ensure padding does not cause overflow */
         }
 
         h2 {
@@ -67,7 +68,8 @@
         }
 
         input[type="text"],
-        input[type="password"] {
+        input[type="password"],
+        textarea {
             width: 100%;
             padding: 12px;
             margin-top: 6px;
@@ -77,6 +79,7 @@
             font-size: 1rem;
             background-color: #fff;
             color: #333;
+            box-sizing: border-box; /* Ensure padding doesn't overflow */
         }
 
         input[type="submit"] {
@@ -141,8 +144,8 @@
         /* Mobile Responsiveness */
         @media screen and (max-width: 600px) {
             .container {
-                padding: 18px;
-                max-width: 80%;
+                padding: 20px;
+                max-width: 90%; /* Adjust to fit smaller screens */
                 margin-top: 20px; /* Ensure spacing at the top */
             }
 
@@ -153,9 +156,11 @@
             /* Make sure inputs are properly sized on small screens */
             input[type="text"],
             input[type="password"],
-            input[type="submit"] {
+            input[type="submit"],
+            textarea {
                 padding: 10px;
                 font-size: 1rem;
+                width: 100%; /* Ensure elements do not overflow */
             }
 
             .navbar h1 {

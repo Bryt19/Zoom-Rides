@@ -24,8 +24,9 @@
             color: #fff;
         }
 
+        /* Navbar should be fixed at the top with proper spacing */
         .navbar {
-            position: absolute;
+            position: static;
             top: 0;
             left: 0;
             right: 0;
@@ -39,18 +40,17 @@
             z-index: 10;
         }
 
-        .navbar h1 {
-            margin: 0;
-        }
-
+        /* Content Wrapper adjusted to give space below navbar */
         .content-wrapper {
             display: flex;
             flex-direction: column;
             flex-grow: 1;
             justify-content: center; /* Center the content vertically */
             align-items: center;
+            padding-top: 100px; /* Space below navbar */
         }
 
+        /* Container for the booking form */
         .container {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 40px;
@@ -58,7 +58,7 @@
             width: 100%;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-top: 150px; /* Adds space between the navbar and the container */
+            margin-top: 30px; /* No extra margin on top */
             margin-bottom: 100px;
         }
 
@@ -166,17 +166,26 @@
             color: red;
         }
 
+        /* Mobile Responsive Adjustments */
         @media screen and (max-width: 600px) {
+            .navbar {
+                font-size: 1.5rem; /* Adjust navbar heading size on mobile */
+            }
+
+            /* Adjust content wrapper padding-top for mobile devices */
+            .content-wrapper {
+                padding-top: 80px; /* Reduce top space for smaller screens */
+            }
+
+            /* Container adjustments */
             .container {
                 padding: 20px;
                 max-width: 90%;
-                margin-top: 30px;
+                margin-top: 0;
             }
+
             h2 {
                 font-size: 24px;
-            }
-            .navbar h1 {
-                font-size: 1.5rem; /* Adjust navbar heading size on mobile */
             }
         }
 
