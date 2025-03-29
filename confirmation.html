@@ -50,8 +50,8 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
             width: 80%;
             max-width: 650px;
-            margin-top: 60px;
-            margin-bottom: 40px;
+            margin-top: 80px;
+            margin-bottom: 60px;
         }
 
         h2 {
@@ -137,31 +137,32 @@
         }
 
         @media screen and (max-width: 768px) {
-            .container {
-                padding: 20px;
-                width: 85%
-                
-        
-            }
+    .container {
+        padding: 20px;
+        width: 85%;
+        margin-top: 70px; /* Added margin-top */
+        margin-bottom: 50px; /* Added margin-bottom */
+    }
 
-            h2 {
-                font-size: 2rem;
-            }
+    h2 {
+        font-size: 2rem;
+    }
 
-            .receipt p {
-                font-size: 1rem;
-            }
+    .receipt p {
+        font-size: 1rem;
+    }
 
-            .go-home-btn, .back-booking-btn, .download-btn {
-                width: 100%;
-                font-size: 1.1rem;
-                padding: 14px;
-                margin-bottom: 10px;
-            }
+    .go-home-btn, .back-booking-btn, .download-btn {
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 14px;
+        margin-bottom: 10px;
+    }
 
-            .button-container {
-                flex-direction: column;
-            }
+    .button-container {
+        flex-direction: column;
+    }
+
         }
 
         /* Footer Styling */
@@ -172,7 +173,7 @@
             color: #fff;
             text-align: center;
             box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
-            position: absolute;
+            position: fixed;
             bottom: 0;
         }
 
