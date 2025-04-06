@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form - Zoom Rides</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -53,6 +54,13 @@
             z-index: 200;
             margin-top: 500px; /* Space between navbar and container */
             margin-bottom: 60px; /* Space between container and footer */
+            transition: all 0.3s ease; /* Smooth transition for the hover effect */
+        }
+
+        /* Hover effect on container */
+        .container:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Stronger shadow when hovering */
+            transform: scale(1.03); /* Slightly increase the size when hovered */
         }
 
         h2 {
@@ -163,11 +171,11 @@
             .container {
                 padding: 20px;
                 max-width: 100%;
-                margin-top: 40px;
+                margin-top: 60px;
             }
 
             h2 {
-                font-size: 22px;
+                font-size: 20px;
             }
 
             /* Adjust input padding and font size for better readability on mobile */
@@ -187,8 +195,43 @@
             }
 
             .navbar h1 {
-                font-size: 1.5rem; /* Adjust navbar heading size on mobile */
+                font-size: 1.3rem; /* Adjust navbar heading size on mobile */
             }
+        }
+
+        /* Style for the password input and eye icon */
+        .password-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-container input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            background-color: #fff;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .password-container i {
+            position: absolute;
+            top: 45%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #333;
+            display: none; /* Hide the icon by default */
+        }
+
+        /* Change the color when the icon is hovered */
+        .password-container i:hover {
+            color: #4CAF50;
         }
     </style>
 </head>
@@ -211,16 +254,22 @@
             <input type="email" id="email" name="email" placeholder="Enter your email address" required>
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Create your password" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Create your password" required oninput="showEyeIcon('password')">
+                <i id="togglePassword" class="fas fa-eye" onclick="togglePasswordVisibility()" style="display: none;"></i> <!-- Eye icon initially hidden -->
+            </div>
 
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
+            <div class="password-container">
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required oninput="showEyeIcon('confirmPassword')">
+                <i id="toggleConfirmPassword" class="fas fa-eye" onclick="toggleConfirmPasswordVisibility()" style="display: none;"></i> <!-- Eye icon initially hidden -->
+            </div>
 
             <label for="phone">Phone Number</label>
             <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
 
             <label for="age">Age</label>
-            <input type="number" id="age" name="age" placeholder="Enter your age (optional)">
+            <input type="number" id="age" name="age" placeholder="Enter your age">
 
             <label for="gender">Gender</label>
             <select id="gender" name="gender" required>
@@ -234,7 +283,7 @@
             <div class="terms">
                 <label>
                     <input type="checkbox" name="terms" required>
-                    I agree to the <a href="#">Terms and Conditions</a>
+                    I agree to the <a href="T&C.html">Terms and Conditions</a>
                 </label>
             </div>
 
@@ -254,6 +303,58 @@
     </footer>
 
     <script>
+        // Show the eye icon when user starts typing in password input field
+        function showEyeIcon(field) {
+            const passwordField = document.getElementById(field);
+            const toggleIcon = document.getElementById('toggle' + capitalizeFirstLetter(field));
+
+            // Only show the eye icon if there's input in the password field
+            if (passwordField.value.length > 0) {
+                toggleIcon.style.display = "inline"; // Show the icon
+            } else {
+                toggleIcon.style.display = "none"; // Hide the icon
+            }
+        }
+
+        // Capitalize first letter of the string (e.g., 'password' -> 'Password')
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        // Toggle password visibility for the 'Password' input field
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+            
+            // Toggle the type of the password field between 'password' and 'text'
+            if (passwordField.type === "password") {
+                passwordField.type = "text";  // Show password
+                toggleIcon.classList.remove("fa-eye");  // Change icon to "open eye"
+                toggleIcon.classList.add("fa-eye-slash");  // "closed eye" icon
+            } else {
+                passwordField.type = "password";  // Hide password
+                toggleIcon.classList.remove("fa-eye-slash");  // "closed eye" icon
+                toggleIcon.classList.add("fa-eye");  // "open eye" icon
+            }
+        }
+
+        // Toggle password visibility for the 'Confirm Password' input field
+        function toggleConfirmPasswordVisibility() {
+            const confirmPasswordField = document.getElementById('confirmPassword');
+            const toggleIcon = document.getElementById('toggleConfirmPassword');
+            
+            // Toggle the type of the confirm password field between 'password' and 'text'
+            if (confirmPasswordField.type === "password") {
+                confirmPasswordField.type = "text";  // Show password
+                toggleIcon.classList.remove("fa-eye");  // Change icon to "open eye"
+                toggleIcon.classList.add("fa-eye-slash");  // "closed eye" icon
+            } else {
+                confirmPasswordField.type = "password";  // Hide password
+                toggleIcon.classList.remove("fa-eye-slash");  // "closed eye" icon
+                toggleIcon.classList.add("fa-eye");  // "open eye" icon
+            }
+        }
+
         function handleRegistration(event) {
             event.preventDefault(); // Prevent form submission
 
@@ -263,49 +364,61 @@
             const password = document.getElementById('password').value.trim();
             const confirmPassword = document.getElementById('confirmPassword').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const age = document.getElementById('age').value.trim();
+            const age = parseInt(document.getElementById('age').value.trim(), 10);
             const gender = document.querySelector('select[name="gender"]').value;
             const terms = document.querySelector('input[name="terms"]:checked');
 
             const messageDiv = document.getElementById('message');
 
             // Password Validation: At least 8 characters, 1 uppercase, 1 number, 1 symbol
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/;
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
-            // Validate password format
             if (!passwordRegex.test(password)) {
-                messageDiv.textContent = "Password must be at least 8 characters long, include at least one uppercase letter, one number, and one symbol.";
+                messageDiv.textContent = 'Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.';
+                messageDiv.className = 'message';
                 return;
             }
 
-            // Validation for matching passwords
             if (password !== confirmPassword) {
-                messageDiv.textContent = "Passwords do not match.";
+                messageDiv.textContent = 'Passwords do not match.';
+                messageDiv.className = 'message';
                 return;
             }
 
-            // Check if all required fields are filled
-            if (!fullName || !username || !email || !password || !phone || !gender || !terms) {
-                messageDiv.textContent = "Please fill out all required fields.";
+            if (!terms) {
+                messageDiv.textContent = 'You must agree to the Terms and Conditions.';
+                messageDiv.className = 'message';
                 return;
             }
 
-            // Store registration data in localStorage
-            localStorage.setItem('fullName', fullName);
-            localStorage.setItem('username', username);
-            localStorage.setItem('email', email);
-            localStorage.setItem('password', password);
-            localStorage.setItem('phone', phone);
-            localStorage.setItem('age', age);
-            localStorage.setItem('gender', gender);
+            if (age < 18) {
+                messageDiv.textContent = 'You must be at least 18 years old to register.';
+                messageDiv.className = 'message';
+                return;
+            }
 
-            messageDiv.textContent = "Registration successful!";
-            messageDiv.className = "valid"; // Success message
+            // Store user data in localStorage
+            const userData = {
+                fullName: fullName,
+                username: username,
+                email: email,
+                password: password,
+                phone: phone,
+                age: age,
+                gender: gender,
+                avatar: "path-to-avatar.jpg"  // Set default or user-selected avatar path
+            };
 
-            // Redirect to login page after a short delay
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            // Registration Success Message
+            messageDiv.textContent = 'Registration Successful! Redirecting to the login page...';
+            messageDiv.className = 'valid';
+
+            // Redirect to the login page after 2 seconds
             setTimeout(() => {
-                window.location.href = "index.html"; // Change to your login page URL
-            }, 1500); // Redirect after 1.5 seconds
+                window.location.href = "index.html"; // Redirect to login page (index.html)
+            }, 2000);
         }
     </script>
 

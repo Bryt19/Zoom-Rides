@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Form</title>
     <style>
-           body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -43,7 +43,7 @@
         .container {
             background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
             padding: 40px;
-            max-width: 400px;
+            max-width: 750px;
             width: 100%;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
@@ -51,6 +51,34 @@
             margin-top: 80px; /* Added space from the navbar */
             margin-bottom: 20px; /* Added space between form and footer */
             box-sizing: border-box; /* Ensure padding does not cause overflow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for transform and shadow */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Hover effect */
+        .container:hover {
+            transform: translateY(-10px); /* Lift the container slightly */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Enhance shadow to create depth */
+        }
+
+        .car-section {
+            width: 50%; /* Make the car section occupy 45% of the container */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .car-section img {
+            max-width: 100%; /* Make sure the car image fits within its section */
+            border-radius: 8px;
+        }
+
+        .login-section {
+            width: 45%; /* Make the login form section occupy 45% of the container */
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         h2 {
@@ -80,6 +108,19 @@
             background-color: #fff;
             color: #333;
             box-sizing: border-box; /* Ensure padding doesn't overflow */
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .car-icon {
+            position: absolute;
+            top: 43%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.3rem;
         }
 
         input[type="submit"] {
@@ -144,9 +185,18 @@
         /* Mobile Responsiveness */
         @media screen and (max-width: 600px) {
             .container {
+                flex-direction: column;
                 padding: 20px;
                 max-width: 90%; /* Adjust to fit smaller screens */
                 margin-top: 20px; /* Ensure spacing at the top */
+            }
+
+            .car-section,
+            .login-section {
+                width: 100%; /* Full width for mobile */
+                padding-left: 0;
+                padding-right: 0;
+                margin-bottom: 20px;
             }
 
             h2 {
@@ -175,48 +225,63 @@
         <h1>Welcome to Zoom Rides Car Rental</h1>
     </div>
 
-<div class="container">
-    <h2>Login to Your Account</h2>
-    <form id="loginForm" onsubmit="return handleLogin(event)">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
-
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-        <input type="submit" value="Login">
-        <div id="validationMessage" class="message"></div>
-
-        <div class="sign-in-link">
-            <p>Don't have an account? <a href="registration.html">Sign Up</a></p>
+    <div class="container">
+        <div class="car-section">
+            <img src="./img/Sec car.png" alt="Car Image"> <!-- Replace with your car image path -->
         </div>
-    </form>
-</div>
+        <div class="login-section">
+            <h2>Login to Your Account</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
 
-<footer>
-    <p>&copy; 2025 Zoom Rides. All rights reserved.</p>
-</footer>
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <span class="car-icon" onclick="togglePasswordVisibility()">
+                        🚗
+                    </span>
+                </div>
 
-<script>
-    // Handle the login form
-    function handleLogin(event) {
-        event.preventDefault(); // Prevent form submission
+                <input type="submit" value="Login">
+                <div id="validationMessage" class="message"></div>
 
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const validationMessage = document.getElementById('validationMessage');
+                <div class="sign-in-link">
+                    <p>Don't have an account? <a href="registration.html">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 
-        // Retrieve the credentials from localStorage
-        const storedUsername = localStorage.getItem('username');
-        const storedPassword = localStorage.getItem('password');
+    <footer>
+        <p>&copy; 2025 Zoom Rides. All rights reserved.</p>
+    </footer>
 
-        // Clear previous validation message
-        validationMessage.textContent = "";
+    <script>
+        // Handle the login form
+function handleLogin(event) {
+    event.preventDefault(); // Prevent form submission
 
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const validationMessage = document.getElementById('validationMessage');
+
+    // Retrieve the stored user data from localStorage
+    const storedUserData = JSON.parse(localStorage.getItem('userData')); // Get all user data stored during registration
+
+    // Clear previous validation message
+    validationMessage.textContent = "";
+
+    // Check if storedUserData exists in localStorage
+    if (storedUserData) {
         // Check if entered credentials match the stored ones
-        if (username === storedUsername && password === storedPassword) {
+        if ((username === storedUserData.username || username === storedUserData.email) && password === storedUserData.password) {
             validationMessage.textContent = "Login successful! Redirecting to homepage...";
             validationMessage.className = "valid"; // Success message
+
+            // Mark the user as logged in
+            localStorage.setItem("userLoggedIn", true);
+            localStorage.setItem("avatar", storedUserData.avatar || "path-to-default-avatar.jpg");  // Store their avatar
 
             // Redirect to the homepage after a short delay
             setTimeout(() => {
@@ -227,12 +292,42 @@
             validationMessage.textContent = "Invalid username or password.";
             validationMessage.className = "message"; // Error message
         }
-
-        // This should be done when the user logs in successfully
-        localStorage.setItem("userLoggedIn", true);  // Mark the user as logged in
-        localStorage.setItem("avatar", "path-to-avatar.jpg");  // Store their avatar image path (or use a default avatar)
+    } else {
+        // Show error message if no user data exists in localStorage
+        validationMessage.textContent = "No user found. Please register first.";
+        validationMessage.className = "message"; // Error message
     }
-</script>
+
+    // Clear form fields after processing
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+}
+
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const carIcon = document.querySelector('.car-icon');
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text"; // Show password
+                carIcon.textContent = "🚙"; // Switch to another car (or any other car emoji you like)
+            } else {
+                passwordField.type = "password"; // Hide password
+                carIcon.textContent = "🚗"; // Switch back to the original car
+            }
+        }
+
+        // Show the car icon only when the user starts typing in the password field
+        document.getElementById('password').addEventListener('input', function() {
+            const carIcon = document.querySelector('.car-icon');
+            if (this.value.length > 0) {
+                carIcon.style.display = 'block';
+            } else {
+                carIcon.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>

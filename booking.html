@@ -24,20 +24,35 @@
             color: #fff;
         }
 
-        /* Navbar should be fixed at the top with proper spacing */
+        /* Navbar styling */
         .navbar {
-            position: static;
+            position: static; /* Fix navbar at the top */
             top: 0;
             left: 0;
             right: 0;
-            background-color: rgba(0, 0, 0, 0.7); 
-            color: #fff;
+            background-color: rgba(0, 0, 0, 0.8); 
+            color: #fff; /* White text */
             text-align: center;
-            padding: 15px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            z-index: 10;
+            padding: 20px 0; 
+            font-size: 2rem; 
+            font-weight: 700; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); 
+            z-index: 100; 
+            width: 100%;
+            transition: background-color 0.3s ease; 
+        }
+
+        /* Add a hover effect to the navbar to change the background color */
+        .navbar:hover {
+            background-color: rgba(0, 0, 0, 1); 
+        }
+
+        /* Make sure the navbar text is responsive */
+        .navbar h1 {
+            font-size: 2rem;
+            margin: 0;
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
         }
 
         /* Content Wrapper adjusted to give space below navbar */
@@ -45,9 +60,9 @@
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            justify-content: center; /* Center the content vertically */
+            justify-content: center; 
             align-items: center;
-            padding-top: 100px; /* Space below navbar */
+            padding-top: 100px; 
         }
 
         /* Container for the booking form */
@@ -58,8 +73,15 @@
             width: 100%;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-top: 30px; /* No extra margin on top */
+            margin-top: 30px;
             margin-bottom: 100px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+            background-color: rgba(255, 255, 255, 1); 
         }
 
         h2 {
@@ -110,6 +132,25 @@
 
         input[type="submit"]:hover {
             background-color: #45a049;
+            transform: translateY(-3px);
+        }
+
+        /* Back to Homepage Button */
+        .back-home-btn {
+            background-color: #e74c3c; /* Red color */
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 20px; /* Space between Confirm Booking and Back to Homepage */
+        }
+
+        .back-home-btn:hover {
+            background-color: #c0392b; /* Darker red on hover */
             transform: translateY(-3px);
         }
 
@@ -202,6 +243,33 @@
         .footer p {
             font-size: 1rem;
         }
+
+        /* Styling for License Section */
+        .license-section {
+            background-color: #f8f8f8;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .license-section h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* Additional style to display the uploaded file preview */
+        #licensePreview {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            color: green;
+        }
+
+        #licensePreview img {
+            max-width: 200px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
@@ -248,44 +316,76 @@
                 <label for="dropoffDate">Drop-off Date</label>
                 <input type="date" id="dropoffDate" name="dropoffDate" required>
 
+                <!-- License Upload Section -->
+                <div class="license-section">
+                    <h3>Upload Your Driver's License</h3>
+                    <label for="drivingLicense"></label>
+                    <input type="file" id="drivingLicense" name="drivingLicense" accept="image/*,application/pdf" required onchange="displayLicensePreview(event)">
+                    <div id="licensePreview"></div>
+                </div> <br>
+
                 <!-- Submit Button -->
                 <input type="submit" value="Confirm Booking">
+                
+                <!-- Back to Homepage Button -->
+                <button type="button" class="back-home-btn" style="display:none;" onclick="window.location.href='homepage.html';">Back to Homepage</button>
+
+                <!-- Message Section -->
                 <div id="message" class="message"></div>
-
-                <!-- Button container for side by side buttons -->
-                <div class="button-container">
-                    <!-- Go to Homepage Button -->
-                    <button type="button" class="go-home-btn" style="display:none;" onclick="window.location.href='homepage.html';">Back to Homepage</button>
-
-                    <!-- View Booking Button -->
-                    <button type="button" class="view-booking-btn" style="display:none;" onclick="window.location.href='confirmation.html';">View Booking</button>
-                </div>
             </form>
+        </div>
+        
+        <div class="button-container">
+            <button class="go-home-btn" style="display:none" onclick="window.location.href='homepage.html';">Go to Homepage</button>
+            <button class="view-booking-btn" style="display:none" onclick="window.location.href='viewBooking.html';">View Booking</button>
         </div>
     </div>
 
+    <div class="footer">
+        <p>&copy; 2025 Zoom Rides. All rights reserved.</p>
+    </div>
+
     <script>
-        // Handle the booking form
+        // Function to display uploaded driver's license preview
+        function displayLicensePreview(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('licensePreview');
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function() {
+                    const img = document.createElement('img');
+                    img.src = reader.result;
+                    preview.innerHTML = ''; // Clear previous preview
+                    preview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Handle the booking form submission
         function handleBooking(event) {
             event.preventDefault(); // Prevent form submission
 
-            // Get the values from the form
+            // Get the form values
             const carName = document.getElementById('carName').value.trim();
             const pickupLocation = document.getElementById('pickupLocation').value.trim();
             const dropoffLocation = document.getElementById('dropoffLocation').value.trim();
             const pickupDate = document.getElementById('pickupDate').value;
             const dropoffDate = document.getElementById('dropoffDate').value;
+            const drivingLicense = document.getElementById('drivingLicense').files[0];
             const messageDiv = document.getElementById('message');
             const goHomeButton = document.querySelector('.go-home-btn');
             const viewBookingButton = document.querySelector('.view-booking-btn');
+            const backHomeButton = document.querySelector('.back-home-btn'); // Get the back home button
             const confirmButton = document.querySelector('input[type="submit"]');
 
             // Clear previous validation message
             messageDiv.textContent = "";
 
             // Validate if all fields are filled
-            if (!carName || !pickupLocation || !dropoffLocation || !pickupDate || !dropoffDate) {
-                messageDiv.textContent = "Please fill out all required fields.";
+            if (!carName || !pickupLocation || !dropoffLocation || !pickupDate || !dropoffDate || !drivingLicense) {
+                messageDiv.textContent = "Please fill out all required fields and upload your driving license.";
                 messageDiv.className = "message";
                 return;
             }
@@ -312,13 +412,9 @@
             confirmButton.style.display = "none";
             goHomeButton.style.display = "block";
             viewBookingButton.style.display = "block";
+            backHomeButton.style.display = "block"; // Show the back home button
         }
     </script>
-
-    <!-- Footer -->
-    <div class="footer">
-        <p>&copy; 2025 Zoom Rides Car Rental. All rights reserved.</p>
-    </div>
 
 </body>
 </html>
