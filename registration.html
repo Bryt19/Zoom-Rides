@@ -166,14 +166,15 @@
             bottom: 0;
         }
 
-        /* Mobile Responsiveness */
+            /* Mobile responsiveness */
         @media screen and (max-width: 600px) {
+            /* Container adjustments */
             .container {
                 flex-direction: column;
                 padding: 20px;
-                max-width: 90%; /* Adjust to fit smaller screens */
-                margin-top: 44%;
-                margin-bottom: 30%; /* Ensure spacing at the top */
+                max-width: 90%; /* More width for mobile */
+                margin-top: 120px; /* Adjusting for navbar height on smaller screens */
+                margin-bottom: 30%; /* Ensure spacing at the bottom */
             }
 
             h2 {
@@ -196,10 +197,16 @@
                 padding: 12px;
             }
 
+            /* Navbar heading */
             .navbar h1 {
                 position: static;
                 margin-bottom: 20px;
-                font-size: 1.1rem; /* Adjust navbar heading size on mobile */
+                font-size: 1.1rem; /* Adjusted for mobile */
+            }
+
+            /* Footer should stay at the bottom */
+            footer {
+                margin-top: auto; /* Push footer to the bottom */
             }
         }
 

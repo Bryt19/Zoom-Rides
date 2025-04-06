@@ -183,42 +183,68 @@
         }
 
         /* Mobile Responsiveness */
+        
         @media screen and (max-width: 600px) {
+            /* Container styling */
             .container {
                 flex-direction: column;
                 padding: 20px;
-                max-width: 90%; /* Adjust to fit smaller screens */
-                margin-top: 44%;
-                margin-bottom: 30%; /* Ensure spacing at the top */
+                max-width: 90%; /* Adjust for mobile screens */
+                margin-top: 50%; /* Center container with enough space from top */
             }
 
+            /* Adjust sections for mobile devices */
             .car-section,
             .login-section {
-                width: 100%; /* Full width for mobile */
+                width: 100%; /* Ensure full width for mobile devices */
                 padding-left: 0;
                 padding-right: 0;
-                margin-bottom: 20px;
+                margin-bottom: 20px; /* Add space between sections */
             }
 
+            /* Heading font size for better mobile readability */
             h2 {
                 font-size: 20px;
             }
 
-            /* Make sure inputs are properly sized on small screens */
+            /* Form elements */
             input[type="text"],
             input[type="password"],
             input[type="submit"],
             textarea {
                 padding: 10px;
                 font-size: 1rem;
-                width: 100%; /* Ensure elements do not overflow */
+                width: 100%; /* Make sure inputs don't overflow */
+                margin-top: 8px; /* Add space between inputs */
+                box-sizing: border-box; /* Ensures padding doesn't affect width */
             }
 
+            /* Adjust navbar heading font size */
             .navbar h1 {
-                font-size: 1.5rem; /* Adjust navbar heading size on mobile */
+                font-size: 1.3rem; /* Slightly smaller font for navbar title */
             }
-    
+
+            /* Footer adjustments */
+            .footer {
+                margin-top: auto; /* Ensure footer stays at the bottom */
+                padding: 10px 0;
+                text-align: center;
+                font-size: 0.9rem; /* Slightly smaller footer font */
+            }
+
+            /* Additional styling adjustments for car and login section */
+            .car-section,
+            .login-section {
+                padding: 10px; /* Reduce padding for mobile */
+            }
+
+            /* Ensure all form buttons and inputs scale well */
+            input[type="submit"] {
+                padding: 12px;
+                font-size: 1rem;
+            }
         }
+
     </style>
 </head>
 <body>
