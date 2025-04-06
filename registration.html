@@ -168,13 +168,13 @@
 
         /* Mobile responsiveness adjustments for screens with max-width 600px */
         @media screen and (max-width: 600px) {
-            /* Hide navbar and footer on mobile */
+            /* Show navbar and footer on mobile (remove display: none) */
             .navbar {
-                display: none; /* Hide the navbar */
+                display: block; /* Ensure the navbar is displayed */
             }
 
             footer {
-                display: none; /* Hide the footer */
+                display: block; /* Ensure the footer is displayed */
             }
 
             /* Container adjustments */
@@ -182,7 +182,7 @@
                 flex-direction: column;
                 padding: 20px;
                 max-width: 80%; /* Adjust to fit mobile screens */
-                margin-top: 90%; /* Position the container just above the middle */
+                margin-top: 120%; /* Position the container just above the middle */
                 margin-bottom: 40%; /* Remove bottom margin to prevent too much space */
                 background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
                 border-radius: 10px;
@@ -234,6 +234,7 @@
                 text-align: center;
             }
         }
+
 
 
 
