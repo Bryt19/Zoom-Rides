@@ -161,8 +161,8 @@
             margin-top: 30px;
         }
 
-        .go-home-btn, .view-booking-btn {
-            width: 48%;
+        .view-booking-btn {
+            width: 100%;
             padding: 14px;
             border: none;
             border-radius: 8px;
@@ -171,19 +171,6 @@
             text-transform: uppercase;
             font-weight: 600;
             transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-
-        .go-home-btn {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .go-home-btn:hover {
-            background-color: #0056b3;
-            transform: translateY(-3px);
-        }
-
-        .view-booking-btn {
             background-color: #6c757d;
             color: white;
         }
@@ -290,13 +277,20 @@
                     <option selected>Select Your Car type</option>
                     <option value="BMW M4 Competition">BMW M4 Competition</option>
                     <option value="Mercedes Benz AMG One">Mercedes Benz AMG One</option>
+                    <option value="Aston Martin Valkyrie">Aston Martin Valkyrie</option>
                     <option value="Ferrari 488 Pista">Ferrari 488 Pista</option>
+                    <option value="Dodge SRT Demon">Dodge SRT Demon</option>
                     <option value="Toyota Supra">Toyota Supra</option>
+                    <option value="Audi RS 7">Audi RS 7</option>
                     <option value="Tesla Model 3">Tesla Model 3</option>
                     <option value="Nissan GTR 35">Nissan GTR 35</option>
                     <option value="Pagani Zonda">Pagani Zonda</option>
+                    <option value="Hennessey Venom F5">Hennessey Venom F5</option>
                     <option value="Koenigsegg Jesko">Koenigsegg Jesko</option>
+                    <option value="Porsche 911 Gt3rs">Porsche 911 Gt3rs</option>
                     <option value="Lamborghini Sesto Elemento">Lamborghini Sesto Elemento</option>
+                    <option value="Bugatti Divo">Bugatti Divo</option>
+                    <option value="Chevrolet Corvette C8">Chevrolet Corvette C8</option>
                     <option value="McLaren 720s">McLaren 720s</option>
                 </select>
 
@@ -332,12 +326,10 @@
 
                 <!-- Message Section -->
                 <div id="message" class="message"></div>
+
+                <!-- View Booking Button -->
+                <button type="button" class="view-booking-btn" style="display:none;" onclick="window.location.href='confirmation.html';">View Booking</button>
             </form>
-        </div>
-        
-        <div class="button-container">
-            <button class="go-home-btn" style="display:none" onclick="window.location.href='homepage.html';">Go to Homepage</button>
-            <button class="view-booking-btn" style="display:none" onclick="window.location.href='viewBooking.html';">View Booking</button>
         </div>
     </div>
 
@@ -375,9 +367,8 @@
             const dropoffDate = document.getElementById('dropoffDate').value;
             const drivingLicense = document.getElementById('drivingLicense').files[0];
             const messageDiv = document.getElementById('message');
-            const goHomeButton = document.querySelector('.go-home-btn');
-            const viewBookingButton = document.querySelector('.view-booking-btn');
             const backHomeButton = document.querySelector('.back-home-btn'); // Get the back home button
+            const viewBookingButton = document.querySelector('.view-booking-btn'); // Get the view booking button
             const confirmButton = document.querySelector('input[type="submit"]');
 
             // Clear previous validation message
@@ -410,9 +401,8 @@
 
             // Hide the "Confirm Booking" button and show the "Back to Homepage" and "View Booking" buttons
             confirmButton.style.display = "none";
-            goHomeButton.style.display = "block";
-            viewBookingButton.style.display = "block";
             backHomeButton.style.display = "block"; // Show the back home button
+            viewBookingButton.style.display = "block"; // Show the view booking button
         }
     </script>
 

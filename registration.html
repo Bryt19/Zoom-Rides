@@ -409,8 +409,9 @@
 
             const messageDiv = document.getElementById('message');
 
-            // Password Validation: At least 8 characters, 1 uppercase, 1 number, 1 symbol
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+            // Password Validation: At least 8 characters, 1 uppercase, 1 number, 1 symbol (any symbol)
+            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[A-Za-z\d\W_]{8,}$/;
+
 
             if (!passwordRegex.test(password)) {
                 messageDiv.textContent = 'Password must be at least 8 characters long and include an uppercase letter, a number, and a special character.';

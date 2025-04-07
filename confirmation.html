@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Booking Confirmation</title>
     <style>
-        /* Styling as before */
-        /* Global Styling */
+        /* Reset some default styles */
         * {
             margin: 0;
             padding: 0;
@@ -14,8 +14,8 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: url('./img/mc 2.jpg') no-repeat center center fixed;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: url('./img/radical.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
             height: 100vh;
@@ -24,119 +24,133 @@
             align-items: center;
             text-align: center;
             flex-direction: column;
-            min-height: 100vh; /* Ensures body takes full screen height */
+            padding: 0 20px;
         }
 
         /* Container Styling */
         .container {
-            background-color: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 650px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 800px;
             margin-top: 100px;
             margin-bottom: 100px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 60px rgba(0, 0, 0, 0.4);
         }
 
         /* Main Heading */
         h2 {
-            color: #4CAF50;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            color: #e1c16f;
+            font-size: 3rem;
+            margin-bottom: 30px;
             font-weight: 700;
         }
 
         /* Text Styling */
         p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            color: #415a77;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #ddd;
         }
 
-        /* Receipt Styling */
+        /* Receipt Section */
         .receipt {
-            background-color: #f9f9f9;
-            color: #333;
-            padding: 25px;
-            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #f0f0f0;
+            padding: 30px;
+            border-radius: 15px;
             margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
             text-align: left;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .bold {
+            font-weight: bold;
+            color: #e1c16f;
         }
 
         /* Button Styling */
-        .bold {
-            font-weight: bold;
-            color: #333;
-        }
-
         .button-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
+            gap: 15px;
+            margin-top: 40px;
+            transition: transform 0.3s ease;
         }
 
-        .go-home-btn, .back-booking-btn, .download-btn {
-            width: 50%;
-            padding: 14px 24px;
+        .go-home-btn,
+        .back-booking-btn,
+        .download-btn {
+            width: 48%;
+            padding: 15px 25px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
             text-transform: uppercase;
             transition: transform 0.3s ease, background-color 0.3s ease;
-            font-weight: bold;
         }
 
         .go-home-btn {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            background: linear-gradient(135deg, #45aaf2, #4eade5);
             color: white;
         }
 
         .go-home-btn:hover {
-            background: linear-gradient(135deg, #0099cc, #0066cc);
+            background: linear-gradient(135deg, #4eade5, #2e90d3);
             transform: translateY(-3px);
         }
 
         .back-booking-btn {
-            background: linear-gradient(135deg, #f6d02f, #f9a825);
+            background: linear-gradient(135deg, #ffd700, #f7b500);
             color: white;
         }
 
         .back-booking-btn:hover {
-            background: linear-gradient(135deg, #e5c500, #c79f00);
+            background: linear-gradient(135deg, #f7b500, #ffcc00);
             transform: translateY(-3px);
         }
 
         .download-btn {
-            background: linear-gradient(135deg, #ff4b5c, #ff7b00);
+            background: linear-gradient(135deg, #ff6a6a, #ff4e4e);
             color: white;
         }
 
         .download-btn:hover {
-            background: linear-gradient(135deg, #ff3a47, #ff6500);
+            background: linear-gradient(135deg, #ff4e4e, #e54b4b);
             transform: translateY(-3px);
         }
 
         /* Media Query for Small Screens */
         @media screen and (max-width: 768px) {
             .container {
-                padding: 20px;
-                width: 85%;
-                margin-top: 100px; /* Added margin-top */
-                margin-bottom: 100px; /* Added margin-bottom */
+                padding: 25px;
+                width: 90%;
+                margin-top: 60px;
+                margin-bottom: 60px;
             }
 
             h2 {
-                font-size: 2rem;
+                font-size: 2.4rem;
             }
 
             .receipt p {
-                font-size: 1rem;
+                font-size: 1.1rem;
             }
 
-            .go-home-btn, .back-booking-btn, .download-btn {
+            .go-home-btn,
+            .back-booking-btn,
+            .download-btn {
                 width: 100%;
                 font-size: 1.1rem;
                 padding: 14px;
@@ -152,14 +166,16 @@
     <!-- Include jsPDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
 
     <div class="container">
         <h2>Booking Confirmation</h2>
-        <p>Your booking has been successfully confirmed. Thank you for choosing us!</p>
+        <p>Your booking has been successfully confirmed. Thank you for choosing Zoom Rides!</p>
 
         <!-- Receipt Section -->
         <div class="receipt">
+            <p><span class="bold">Booking ID:</span> <span id="bookingID"></span></p>
             <p><span class="bold">Car Name:</span> <span id="carName"></span></p>
             <p><span class="bold">Pick-up Location:</span> <span id="pickupLocation"></span></p>
             <p><span class="bold">Drop-off Location:</span> <span id="dropoffLocation"></span></p>
@@ -180,7 +196,13 @@
     </div>
 
     <script>
-        window.onload = function() {
+        window.onload = function () {
+            // Generate a unique Booking ID
+            const bookingID = 'BID-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+
+            // Store the booking ID in localStorage
+            localStorage.setItem('bookingID', bookingID);
+
             // Get the booking data from localStorage
             const carName = localStorage.getItem('carName');
             const pickupLocation = localStorage.getItem('pickupLocation');
@@ -191,6 +213,7 @@
             // Check if booking data exists in localStorage
             if (carName && pickupLocation && dropoffLocation && pickupDate && dropoffDate) {
                 // Dynamically populate the details on the page
+                document.getElementById('bookingID').textContent = bookingID;
                 document.getElementById('carName').textContent = carName;
                 document.getElementById('pickupLocation').textContent = pickupLocation;
                 document.getElementById('dropoffLocation').textContent = dropoffLocation;
@@ -208,22 +231,51 @@
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
 
-            // Get the booking details
-            const carName = document.getElementById('carName').textContent;
-            const pickupLocation = document.getElementById('pickupLocation').textContent;
-            const dropoffLocation = document.getElementById('dropoffLocation').textContent;
-            const pickupDate = document.getElementById('pickupDate').textContent;
-            const dropoffDate = document.getElementById('dropoffDate').textContent;
+            // Set up fonts and styles
+            doc.setFont('Helvetica');
+            doc.setFontSize(14);
 
-            // Add content to PDF
-            doc.setFontSize(16);
-            doc.text('Booking Confirmation', 20, 20);
+            // Company Information (Header)
+            doc.setFontSize(22);
+            doc.setTextColor(225, 193, 111);  // Company color
+            doc.text('Zoom Rides', 20, 20);
+
+            // Company contact details
             doc.setFontSize(12);
-            doc.text(`Car Name: ${carName}`, 20, 40);
-            doc.text(`Pick-up Location: ${pickupLocation}`, 20, 50);
-            doc.text(`Drop-off Location: ${dropoffLocation}`, 20, 60);
-            doc.text(`Pick-up Date: ${pickupDate}`, 20, 70);
-            doc.text(`Drop-off Date: ${dropoffDate}`, 20, 80);
+            doc.setTextColor(100, 100, 100);
+            doc.text('Address: 123 Zoom Street, City', 20, 30);
+            doc.text('Phone: (123) 456-7890', 20, 35);
+            doc.text('Email: support@zoomrides.com', 20, 40);
+
+            // Add a line to separate company details and booking info
+            doc.setLineWidth(0.5);
+            doc.setDrawColor(100, 100, 100);
+            doc.line(20, 45, 190, 45);
+
+            // Add space after the line
+            doc.text('Booking Confirmation', 20, 55);
+
+            // Booking Details (Body)
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0); // Default black text color
+            doc.text(`Booking ID: ${document.getElementById('bookingID').textContent}`, 20, 65);
+            doc.text(`Car Name: ${document.getElementById('carName').textContent}`, 20, 75);
+            doc.text(`Pick-up Location: ${document.getElementById('pickupLocation').textContent}`, 20, 85);
+            doc.text(`Drop-off Location: ${document.getElementById('dropoffLocation').textContent}`, 20, 95);
+            doc.text(`Pick-up Date: ${document.getElementById('pickupDate').textContent}`, 20, 105);
+            doc.text(`Drop-off Date: ${document.getElementById('dropoffDate').textContent}`, 20, 115);
+
+            // Draw a border around the content area
+            doc.setLineWidth(1);
+            doc.setDrawColor(200, 200, 200); // Light grey
+            doc.rect(10, 50, 190, 130);  // Content area
+
+            // Footer with additional company information (Adjusted position)
+            const footerYPosition = 200;  // Position the footer 20 units below the content area
+            doc.setFontSize(10);
+            doc.setTextColor(150, 150, 150); // Lighter text color
+            doc.text('Thank you for choosing Zoom Rides!', 20, footerYPosition);
+            doc.text('For any issues, contact our support at: support@zoomrides.com', 20, footerYPosition + 5);
 
             // Save the PDF
             doc.save('booking_receipt.pdf');
@@ -231,4 +283,5 @@
     </script>
 
 </body>
+
 </html>
